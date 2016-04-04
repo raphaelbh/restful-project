@@ -8,7 +8,7 @@ public class User extends BaseEntity {
 	
 	private static final long serialVersionUID = 3196218134327299978L;
 
-	@Column(nullable=false)
+	@Column(nullable=false, unique=true)
 	private String email;
 	
 	@Column(nullable=false)
