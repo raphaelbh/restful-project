@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.demo.AppConstants;
+import com.demo.AppEncryptor;
 import com.demo.entity.User;
 import com.demo.repository.UserRepository;
 
@@ -33,7 +34,12 @@ public class UserServiceImpl extends BaseService implements UserService {
 	@RequestMapping(value="", method=RequestMethod.POST)
 	public ResponseEntity<User> save(@RequestBody User user) {
 		
+		String encryptedPassword = AppEncryptor.encrypt(user.getPassword());
+		user.setPassword(encryptedPassword);
+		
 		User savedUser = userRepository.save(user);
+		LOG.info(savedUser + " created");
+		
 		return new ResponseEntity<User>(savedUser, HttpStatus.CREATED);
 		
 	}
@@ -41,17 +47,25 @@ public class UserServiceImpl extends BaseService implements UserService {
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public ResponseEntity<User> login(@RequestBody User user) {
 		
-		String email = user.getEmail();
-		String password = user.getPassword(); //TODO: encrypt
-		
-		User authUser = userRepository.findByEmailAndPassword(email, password);
+		User authUser = userRepository.findByEmail(user.getEmail());
 		if (authUser != null) {
 			
-			HttpSession session = request.getSession(true);
-			session.setAttribute(AppConstants.SESSION_ATTRIB_LOGGED_USER, authUser);
+			if (AppEncryptor.matches(user.getPassword(), authUser.getPassword())) {
+				
+				HttpSession session = request.getSession(true);
+				session.setAttribute(AppConstants.SESSION_ATTRIB_LOGGED_USER, authUser);
+				
+				LOG.info(authUser + " logged");
+				
+			} else {
+				
+				authUser = null;
+				LOG.info("Invalid credential for  " + authUser);
+				
+			}
 			
-			LOG.info(authUser + " logged");
-			
+		} else {
+			LOG.info("User " + user.getEmail() + " not found");
 		}
 		
 		return new ResponseEntity<User>(authUser, HttpStatus.OK);

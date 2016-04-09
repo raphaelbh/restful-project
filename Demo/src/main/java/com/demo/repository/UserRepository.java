@@ -9,7 +9,7 @@ import com.demo.entity.User;
 
 public interface UserRepository extends CrudRepository<User, Serializable> {
 
-	@Query("from User where email = ?1 and password = ?2")
-	User findByEmailAndPassword(String email, String password);
+	@Query("from User where email = ?1")
+	User findByEmail(String email);
 	
 }
