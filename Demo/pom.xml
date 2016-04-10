@@ -7,7 +7,7 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>demo webapp</name>
   <url>http://maven.apache.org</url>
-  <build><finalName>Demo</finalName></build>
+  <build><finalName>demo</finalName></build>
   <dependencies>
   
   	<!-- junit -->
