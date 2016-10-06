@@ -19,12 +19,6 @@ public class User extends BaseEntity {
 	@Column(nullable=false)
 	private String name;
 	
-	@Column(nullable=false)
-	private Long birthday;
-	
-	@Column(columnDefinition="TEXT")
-	private String image;
-	
 	public String getEmail() {
 		return email;
 	}
@@ -44,20 +38,6 @@ public class User extends BaseEntity {
 	}
 	public void setName(String name) {
 		this.name = name;
-	}
-	
-	public Long getBirthday() {
-		return birthday;
-	}
-	public void setBirthday(Long birthday) {
-		this.birthday = birthday;
-	}
-	
-	public String getImage() {
-		return image;
-	}
-	public void setImage(String image) {
-		this.image = image;
 	}
 	
 	@Override
