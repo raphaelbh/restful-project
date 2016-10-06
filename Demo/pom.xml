@@ -74,11 +74,12 @@
 		<version>5.1.0.Final</version>
 	</dependency>
 	
-	<!-- database config [mysql] -->
+	<!-- database config [postgresql] -->
+	<!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
 	<dependency>
-		<groupId>mysql</groupId>
-		<artifactId>mysql-connector-java</artifactId>
-		<version>5.1.38</version>
+	    <groupId>org.postgresql</groupId>
+	    <artifactId>postgresql</artifactId>
+	    <version>9.4-1200-jdbc41</version>
 	</dependency>
 	<dependency>
 		<groupId>commons-dbcp</groupId>

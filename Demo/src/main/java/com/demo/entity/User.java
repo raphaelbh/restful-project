@@ -2,8 +2,10 @@ package com.demo.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="users")
 public class User extends BaseEntity {
 	
 	private static final long serialVersionUID = 3196218134327299978L;

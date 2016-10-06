@@ -27,10 +27,10 @@ public class PersistenceConfig {
 	public DataSource dataSource() {
 		
 		BasicDataSource dataSource = new BasicDataSource();
-		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-		dataSource.setUrl("jdbc:mysql://127.0.0.1:8889/demo");
-		dataSource.setUsername("root");
-		dataSource.setPassword("root");
+		dataSource.setDriverClassName("org.postgresql.Driver");
+		dataSource.setUrl("jdbc:postgresql://127.0.0.1:5432/finan?autoReconnect=true");
+		dataSource.setUsername("finan");
+		dataSource.setPassword("finan");
 		
 		return dataSource;
 	}
@@ -56,7 +56,7 @@ public class PersistenceConfig {
 		HibernateJpaVendorAdapter hibernateJpaVendorAdapter = new HibernateJpaVendorAdapter();
 		hibernateJpaVendorAdapter.setShowSql(false);
 		hibernateJpaVendorAdapter.setGenerateDdl(true);
-		hibernateJpaVendorAdapter.setDatabase(Database.MYSQL);
+		hibernateJpaVendorAdapter.setDatabase(Database.POSTGRESQL);
 		
 		return hibernateJpaVendorAdapter;
 	}
